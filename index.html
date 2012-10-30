@@ -1,8 +1,21 @@
 <html>
   <head>
+    <script type="text/javascript" src="/lib/require.js"></script>
+    <script type="text/javascript">
+      require.config({
+        baseUrl: "/lib",
+      });
+      require(['cs!sun'],
+        function(Sun) {
+          canvas = document.getElementById("experiment");
+          var sw = new Sun.SunWorld(canvas);
+          //sw.objects.push(new Sun.Sun(sw));
+          //sw.objects.push(new Sun.Tree());
+          sw.run();
+        }
+      );
+    </script>
     <title>nijotz.com</title>
-
-    <script type="text/javascript" src="sun.js"></script>
 
     <style type="text/css">
       #experiment {
