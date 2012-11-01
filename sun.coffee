@@ -149,7 +149,13 @@ define ['cs!canvas-tools/world'], (World) ->
         ring.update()
 
     mouseMovement: (evt) =>
-      @updatePosition(evt.clientX, evt.clientY);
+      #TODO: this only works for width/heigh=100%
+      # any kind of offset will fuck this all up
+      # event handling should be proxied through the world object probably
+      @updatePosition(
+        Math.floor(evt.clientX / @world.scale),
+        Math.floor(evt.clientY / @world.scale)
+      )
 
 
     mouseClick: (evt) =>
@@ -286,8 +292,8 @@ define ['cs!canvas-tools/world'], (World) ->
       @trunk.targetLength = 0.6
 
     eventResize: =>
-      @x = document.body.clientWidth / 2
-      @y = document.body.clientHeight
+      @x = @world.width / 2
+      @y = @world.height
 
 
   class SunWorld extends World.World
