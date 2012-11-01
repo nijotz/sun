@@ -1,6 +1,7 @@
 define ['cs!canvas-tools/world'], (World) ->
 
   #TODO: layers, layer numbers
+  #TODO: PRAISE THE SUN!
 
   class SunArms
     constructor: (@world) ->
