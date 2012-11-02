@@ -1,4 +1,4 @@
-define ['cs!canvas-tools/world'], (World) ->
+define ['cs!canvas-tools/flow-world'], (FlowWorld) ->
 
   #TODO: layers, layer numbers
   #TODO: PRAISE THE SUN!
@@ -296,9 +296,14 @@ define ['cs!canvas-tools/world'], (World) ->
       @y = @world.height
 
 
-  class SunWorld extends World.World
+  class SunWorld extends FlowWorld
     constructor: ->
       super
+
+      # Fluid simulation takes a lot of CPU, scale down the canvas
+      @scale = 4
+      @eventResize()
+
       @displayFPS = true
       @objects.push(new Sun(this))
       @objects.push(new Tree(this))

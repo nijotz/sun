@@ -4,6 +4,11 @@
     <script type="text/javascript">
       require.config({
         baseUrl: "/lib",
+        shim: {
+          'lib/oliver-fluid/pressure.js': {
+            exports: 'Pressure'
+          }
+        },
       });
       require(['cs!sun'],
         function(Sun) {
