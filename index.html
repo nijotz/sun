@@ -10,10 +10,11 @@
           }
         },
       });
-      require(['cs!sun'],
-        function(Sun) {
+      require(['cs!sun', 'cs!canvas-tools/moevg'],
+        function(Sun, SketchCanvas) {
           canvas = document.getElementById("experiment");
-          var sw = new Sun.SunWorld(canvas);
+          sketcher = SketchCanvas(canvas);
+          var sw = new Sun.SunWorld(sketcher);
           //sw.objects.push(new Sun.Sun(sw));
           //sw.objects.push(new Sun.Tree());
           sw.run();

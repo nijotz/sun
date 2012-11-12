@@ -1,4 +1,4 @@
-define ['cs!canvas-tools/flow-world'], (FlowWorld) ->
+define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, World) ->
 
   #TODO: layers, layer numbers
   #TODO: PRAISE THE SUN!
@@ -149,7 +149,7 @@ define ['cs!canvas-tools/flow-world'], (FlowWorld) ->
         ring.update()
 
     mouseMovement: (evt) =>
-      #TODO: this only works for width/heigh=100%
+      #TODO: this only works for width/height=100%
       # any kind of offset will fuck this all up
       # event handling should be proxied through the world object probably
       @updatePosition(
@@ -296,12 +296,12 @@ define ['cs!canvas-tools/flow-world'], (FlowWorld) ->
       @y = @world.height
 
 
-  class SunWorld extends FlowWorld
+  class SunWorld extends World.World
     constructor: ->
       super
 
       # Fluid simulation takes a lot of CPU, scale down the canvas
-      @scale = 4
+      @scale = 1
       @eventResize()
 
       @displayFPS = true
