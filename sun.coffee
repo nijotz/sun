@@ -46,12 +46,11 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
     setWavesPerSecond: (@wps) ->
       @wpt = @wps / @world.ticks #How many waves per tick
 
-    draw: ->
-      c = @world.context
-      c.save()
-      c.translate(@x, @y)
-      c.rotate(@angle)
-      c.fillStyle = @color
+    draw: (context)->
+      context.save()
+      context.translate(@x, @y)
+      context.rotate(@angle)
+      context.fillStyle = @color
 
       #This calculates the bezier points using xbezoffsets{1,2} and wave
       #Basically, we want the first arm line to transition to being a mirror of the second arm line during the progression of $wave going from 0 to 1 and back.
@@ -65,14 +64,14 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
         (@xbezoffsets2[1] + ((@xbezoffsets1[1] * -1 - @xbezoffsets2[1]) * @wave))]
 
       for i in [@arms..0]
-        c.beginPath()
-        c.moveTo(@xoffset, @yoffset)
-        c.bezierCurveTo(xbos1[0], @ybezoffset, xbos1[1], @ybezoffset, 0, @ytipoffset)
-        c.bezierCurveTo(xbos2[1], @ybezoffset, xbos2[0], @ybezoffset, (@xoffset * -1), @yoffset)
-        c.fill()
-        c.rotate(@armAngle)
+        context.beginPath()
+        context.moveTo(@xoffset, @yoffset)
+        context.bezierCurveTo(xbos1[0], @ybezoffset, xbos1[1], @ybezoffset, 0, @ytipoffset)
+        context.bezierCurveTo(xbos2[1], @ybezoffset, xbos2[0], @ybezoffset, (@xoffset * -1), @yoffset)
+        context.fill()
+        context.rotate(@armAngle)
 
-      c.restore()
+      context.restore()
 
     update: ->
       @wave = (@wave + @wpt * @waveDirection)
@@ -123,15 +122,14 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
       for ring in @rings
         ring.setRadius(@radius)
 
-    draw: ->
+    draw: (context) ->
       for ring in @rings
-        ring.draw()
+        ring.draw(context)
 
-      c = @world.context
-      c.fillStyle = "rgb(" + @red + ", " + @green + ", " + @blue + ")"
-      c.beginPath()
-      c.arc(@x, @y, @radius, 0, 2 * Math.PI, true)
-      c.fill()
+      context.fillStyle = "rgb(" + @red + ", " + @green + ", " + @blue + ")"
+      context.beginPath()
+      context.arc(@x, @y, @radius, 0, 2 * Math.PI, true)
+      context.fill()
 
     updatePosition: (x, y) ->
       @x = x
@@ -169,23 +167,22 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
       @angle = Math.PI * 3/2
       @color = "rgb(0,255,0)"
 
-    draw: (x, y) ->
+    draw: (context, x, y) ->
       length = @world.height * 0.04
       xbezoffset = length / 4
       ybezoffset = length / 2
 
-      c = @world.context
-      c.save()
-      c.translate(x, y)
-      c.rotate(@angle)
-      c.fillStyle = @color
-      c.beginPath()
-      c.moveTo(0,0)
-      c.bezierCurveTo(xbezoffset,ybezoffset,xbezoffset,ybezoffset,length,0)
-      c.bezierCurveTo(xbezoffset,-ybezoffset,xbezoffset,-ybezoffset,0,0)
-      c.lineTo(0,0)
-      c.fill()
-      c.restore()
+      context.save()
+      context.translate(x, y)
+      context.rotate(@angle)
+      context.fillStyle = @color
+      context.beginPath()
+      context.moveTo(0,0)
+      context.bezierCurveTo(xbezoffset,ybezoffset,xbezoffset,ybezoffset,length,0)
+      context.bezierCurveTo(xbezoffset,-ybezoffset,xbezoffset,-ybezoffset,0,0)
+      context.lineTo(0,0)
+      context.fill()
+      context.restore()
 
 
   class Branch
@@ -231,25 +228,24 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
     setAngle: (@angle) ->
       @leaf.angle = @angle
 
-    draw: (x, y) ->
-      c = @world.context
-      c.save()
-      c.translate(x, y)
-      c.rotate(@angle)
-      c.fillStyle = @color
-      c.beginPath()
-      c.moveTo(0,@yoffset)
-      c.lineTo(@length, 0)
-      c.lineTo(0,@yoffset * -1)
-      c.fill()
-      c.restore()
+    draw: (context, x, y) ->
+      context.save()
+      context.translate(x, y)
+      context.rotate(@angle)
+      context.fillStyle = @color
+      context.beginPath()
+      context.moveTo(0,@yoffset)
+      context.lineTo(@length, 0)
+      context.lineTo(0,@yoffset * -1)
+      context.fill()
+      context.restore()
 
       for branch in @branches
          newx = x + Math.cos(@angle) * @length * branch[0]
          newy = y + Math.sin(@angle) * @length * branch[0]
-         branch[1].draw(newx, newy)
+         branch[1].draw(context, newx, newy)
 
-      @leaf.draw(x + Math.cos(@angle) * @length, y + Math.sin(@angle) * @length)
+      @leaf.draw(context, x + Math.cos(@angle) * @length, y + Math.sin(@angle) * @length)
 
     update: ->
 
@@ -281,8 +277,8 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
       window.addEventListener('click', @mouseClick, false)
       window.addEventListener('resize', @eventResize, false)
 
-    draw: ->
-      @trunk.draw(@x, @y)
+    draw: (context) ->
+      @trunk.draw(context, @x, @y)
 
     update: ->
       @trunk.update()
