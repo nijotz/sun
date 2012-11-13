@@ -1,4 +1,5 @@
-define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, World) ->
+define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
+(FlowWorld, World, SketchedWorld) ->
 
   #TODO: layers, layer numbers
   #TODO: PRAISE THE SUN!
@@ -292,7 +293,7 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world'], (FlowWorld, Worl
       @y = @world.height
 
 
-  class SunWorld extends World.World
+  class SunWorld extends SketchedWorld
     constructor: ->
       super
 

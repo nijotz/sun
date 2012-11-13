@@ -10,11 +10,10 @@
           }
         },
       });
-      require(['cs!sun', 'cs!canvas-tools/sketcher'],
-        function(Sun, SketchCanvas) {
+      require(['cs!sun'],
+        function(Sun) {
           canvas = document.getElementById("experiment");
-          sketcher = SketchCanvas(canvas);
-          var sw = new Sun.SunWorld(sketcher);
+          var sw = new Sun.SunWorld(canvas);
           //sw.objects.push(new Sun.Sun(sw));
           //sw.objects.push(new Sun.Tree());
           sw.run();
