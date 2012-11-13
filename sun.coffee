@@ -302,8 +302,8 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world', 'cs!canvas-tools/
       @eventResize()
 
       @displayFPS = true
-      @objects.push(new Sun(this))
-      @objects.push(new Tree(this))
+      @addObject(new Sun(this))
+      @addObject(new Tree(this))
       @color = "rgb(10,50,100)"
 
   module =
