@@ -64,7 +64,7 @@ define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world', 'cs!canvas-tools/
       xbos2 = [(@xbezoffsets2[0] + ((@xbezoffsets1[0] * -1 - @xbezoffsets2[0]) * @wave)),
         (@xbezoffsets2[1] + ((@xbezoffsets1[1] * -1 - @xbezoffsets2[1]) * @wave))]
 
-      for i in [@arms..0]
+      for i in [@arms..1]
         context.beginPath()
         context.moveTo(@xoffset, @yoffset)
         context.bezierCurveTo(xbos1[0], @ybezoffset, xbos1[1], @ybezoffset, 0, @ytipoffset)
