@@ -1,5 +1,5 @@
-define ['cs!canvas-tools/flow-world', 'cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
-(FlowWorld, World, SketcherWorld) ->
+define ['cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
+(World, SketcherWorld) ->
 
   #TODO: layers, layer numbers
   #TODO: PRAISE THE SUN!
