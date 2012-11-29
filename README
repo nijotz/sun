@@ -1,0 +1,5 @@
+To build:
+
+# Install node.js
+# npm install requirejs
+# build.sh
