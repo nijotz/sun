@@ -1,16 +1,7 @@
 <html>
   <head>
-    <script type="text/javascript" src="/lib/require.js"></script>
-    <script type="text/javascript">
-      require.config({ baseUrl: "/lib"});
-      require(['cs!sun'],
-        function(Sun) {
-          canvas = document.getElementById("experiment");
-          var sw = new Sun.SunWorld(canvas);
-          sw.run();
-        }
-      );
-    </script>
+    <script data-main="/lib/main.js" src="/lib/require.js"></script>
+
     <title>nijotz.com</title>
 
     <style type="text/css">
