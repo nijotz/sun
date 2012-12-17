@@ -1,7 +1,6 @@
 define ['cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
 (World, SketcherWorld) ->
 
-  #TODO: layers, layer numbers
   #TODO: PRAISE THE SUN!
 
   class SunArms
@@ -148,9 +147,9 @@ define ['cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
         ring.update()
 
     mouseMovement: (evt) =>
-      #TODO: this only works for width/height=100%
-      # any kind of offset will fuck this all up
-      # event handling should be proxied through the world object probably
+      #TODO: this only works for width/height = 100% document size
+      # any kind of offset will fuck this all up. event handling should be
+      # proxied through the world object probably
       @updatePosition(
         Math.floor(evt.clientX / @world.scale),
         Math.floor(evt.clientY / @world.scale)
@@ -297,7 +296,6 @@ define ['cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
     constructor: ->
       super
 
-      # Fluid simulation takes a lot of CPU, scale down the canvas
       @scale = 1
       @eventResize()
 
