@@ -11,6 +11,8 @@
     //it will not be needed.
     stubModules: ['cs'],
 
+    optimize: "none",
+
     modules: [
         {
             name: 'main',
