@@ -115,7 +115,7 @@ define ['cs!canvas-tools/sketcher'],
 
       #Setup inputs
       window.addEventListener('mousemove', @mouseMovement, false)
-      @world.canvas.addEventListener('click', @mouseClick, false)
+      window.addEventListener('mousedown', @mouseClick, false)
       window.addEventListener('resize', @resize, false)
 
     setRadius: (@radius) ->
@@ -274,7 +274,7 @@ define ['cs!canvas-tools/sketcher'],
       @eventResize()
       @mouseClick()
 
-      @world.canvas.addEventListener('click', @mouseClick, false)
+      window.addEventListener('mousedown', @mouseClick, false)
       window.addEventListener('resize', @eventResize, false)
 
     draw: (context) ->
