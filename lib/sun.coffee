@@ -1,5 +1,5 @@
-define ['cs!canvas-tools/world', 'cs!canvas-tools/sketcher'],
-(World, SketcherWorld) ->
+define ['cs!canvas-tools/sketcher'],
+(SketcherWorld) ->
 
   #TODO: PRAISE THE SUN!
 
